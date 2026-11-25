@@ -126,6 +126,8 @@ li::marker { color: var(--ink); }
 .gallery figcaption { margin-top: 14px; color: var(--text); font-size: 15px; line-height: 1.5; max-width: 600px; }
 .gallery figcaption p + p { margin-top: 8px; }
 .gallery.one { grid-template-columns: minmax(0, 1fr); max-width: 860px; }
+.gallery .sheet-thumb { display: block; width: min(100%, 360px); margin-top: 14px; }
+.gallery .sheet-thumb img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--divider); }
 
 /* how it works: the figure, then the steps */
 .flow { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 34px 56px; align-items: start; }
