@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#0033FF">
+<title>talent-swap: same take, a different person</title>
+<meta name="description" content="A case study: a pipeline that puts a new person into an existing video with MiniMax H3. The take is cut into chained pieces, each checked against the source, then joined back into one shot.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the case study</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top">Geofrie A. Putra</a>
+    <span class="page"><span>Creative technologist&nbsp;&middot;<span class="cs"> Case study&nbsp;&middot;</span> <a href="https://www.linkedin.com/in/geofrieazaryaputra/">LinkedIn</a></span></span>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap hero" id="top">
+  <div class="hero-text">
+    <h1><span class="ln">Same take.</span> <span class="ln">A different person.</span></h1>
+    <p class="lede">I built a pipeline that puts a new person into an existing video. One character sheet sets the face, hair and clothes, and the performance, camera move, room and soundtrack stay as shot. It cuts the take into pieces of about five seconds, generates each one with MiniMax H3 on a rented GPU, checks its timing against the source and joins the pieces back into one shot.</p>
+    <p class="links">
+      <a class="btn" href="#before-after">Compare before and after</a>
+      <a class="tlink" href="#how">How it works</a>
+    </p>
+  </div>
+  <figure>
+    <video class="media" controls playsinline preload="metadata" poster="assets/poster-run.jpg" src="assets/run.mp4" aria-label="The Swap page running a 39-second take, 50 seconds with sound"></video>
+    <figcaption>The Swap page in my toolkit running a 39-second take, from upload to the joined result. 50 s, with sound.</figcaption>
+  </figure>
+</div>
+
+<section id="before-after" aria-labelledby="h-ba"><div class="wrap">
+  <h2 id="h-ba">Before and after</h2>
+  <p class="intro">A 19-second stock clip in four chained pieces.<span id="ba-how" hidden> Drag the line, or focus it and use the arrow keys. Both halves play from one video file, so they can't drift apart.</span></p>
+  <div class="ba">
+    <div>
+      <div class="stage" id="ba" hidden>
+        <img src="assets/poster-compare.jpg" width="1280" height="682" alt="">
+        <canvas width="1280" height="682" aria-hidden="true"></canvas>
+        <input type="range" id="ba-range" min="0" max="100" step="1" value="50" aria-label="Before and after divider. Left of the line is the source, right is the result.">
+        <span class="line"></span>
+        <span class="knob"><svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 1 1 7l6 6M19 1l6 6-6 6"/></svg></span>
+        <span class="tag before">Before</span><span class="tag after">After</span>
+      </div>
+      <div class="ctrl" id="ba-ctrl" hidden>
+        <button type="button" class="ghost" id="ba-play" aria-pressed="false"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg><span>Play</span></button>
+      </div>
+      <video id="ba-video" data-src="assets/compare.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"></video>
+      <noscript><div class="fallback"><video controls playsinline preload="metadata" poster="assets/poster-fallback.jpg" src="assets/compare-fallback.mp4" aria-label="Before and after, the source and the result with a moving divider"></video></div></noscript>
+      <p class="note">Source: the first 19 s of Pexels stock video 10265181, resampled from 25 to 24&nbsp;fps. Result: 1920&nbsp;&times;&nbsp;1024 at 24&nbsp;fps. The stock clip has no sound.</p>
+    </div>
+    <aside aria-labelledby="h-sheet">
+      <h3 id="h-sheet">The look it was given</h3>
+      <figure>
+        <img src="assets/sheet.jpg" width="1600" height="894" alt="Character sheet: a short-haired man in a black hoodie printed zdkh and blue jeans, seen from the front, side and back, with two headshots" loading="lazy">
+        <figcaption>One character sheet, generated in Magnific. The face, hair and clothes come from the sheet, while the moves, framing and light come from the source.</figcaption>
+      </figure>
+    </aside>
+  </div>
+</div></section>
+
+<section id="results" aria-labelledby="h-results"><div class="wrap">
+  <h2 id="h-results">More results</h2>
+  <p class="intro">Two more full runs, each as a before and after video. One plays at a time.</p>
+  <div class="gallery">
+    <figure>
+      <h3>Breakdance, 17.8&nbsp;s</h3>
+      <video class="media r" width="1280" height="728" controls playsinline preload="metadata" poster="assets/poster-breakdance.jpg" src="assets/result-breakdance.mp4" aria-label="Breakdance, before and after, 18 seconds with sound"></video>
+      <figcaption>
+        <p>Spins, a handstand and floor work, from Pexels stock video 9344627. Four chained pieces on an NVIDIA A6000. Every piece measured speed 1.000 with at most 2 frames of lag, and the sound matched the source.</p>
+        <p>What breaks: at about 7&nbsp;s the face turns to the camera for a moment where the dancer shows the back of his head. The grade marks it as a fail, and I haven't rerun it.</p>
+      </figcaption>
+    </figure>
+    <figure>
+      <h3>The full 39-second take</h3>
+      <video class="media r" width="1280" height="682" controls playsinline preload="metadata" poster="assets/poster-swappage.jpg" src="assets/result-swappage.mp4" aria-label="The 39-second take, before and after, no sound"></video>
+      <figcaption>
+        <p>The whole clip from the before and after above, run from the <a href="#swap-page">Swap page</a> with a second, more detailed character sheet. Eight chained pieces on an NVIDIA A6000, at speed 1.000 to 1.012 with at most 3 frames of lag.</p>
+        <p>What breaks: in piece 6 one head turn shows more face than the source does. I kept that piece at a 69 warning. The clip has no sound.</p>
+      </figcaption>
+    </figure>
+  </div>
+</div></section>
+
+<section id="how" aria-labelledby="h-how"><div class="wrap">
+  <h2 id="h-how">How it works</h2>
+  <div class="flow">
+    <div class="figs">
+      <figure>
+        <img src="assets/timeline.jpg" width="1600" height="840" alt="Sixteen frames of the source clip, one every 2.5 seconds: a bearded man in a white graffiti T-shirt dancing on a stairwell landing, filmed from a low angle" loading="lazy">
+        <figcaption>Reading the take: one frame every 2.5&nbsp;s across the whole 39-second clip. This run used the first 19&nbsp;s.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/check-pairs.jpg" width="1920" height="338" alt="Six source frames above six output frames at the same moments: the same head tilts and framing, a different man in a black hoodie" loading="lazy">
+        <figcaption>A check sheet from piece 3: source frames on top, the output below, at the same moments.</figcaption>
+      </figure>
+    </div>
+    <ol class="steps">
+      <li><span><b>Read the take.</b> The server measures the clip, looks for hard cuts and lays the timeline out as a frame mosaic.</span></li>
+      <li><span><b>Cut it into pieces</b> of about five seconds, never across a hard cut. Pieces from one continuous shot are chained.</span></li>
+      <li><span><b>Write one prompt per piece.</b> The character description comes from the sheet and is the same, word for word, in every piece.</span></li>
+      <li><span><b>Generate each piece</b> with MiniMax H3 on a rented GPU. A chained piece is guided by the last 22 frames of the piece before it, which carries the face, clothes and light across the join.</span></li>
+      <li><span><b>Check every piece by machine:</b> frame count, plus speed and lag against the source, matched every half second, and the sound against the source's when the clip has any. Each join is scored by how closely its two frames match. A piece that fails is rerun with one change before the next one is built on it.</span></li>
+      <li><span><b>Join and retime.</b> The pieces go back together at the source's length with its soundtrack, next to a side-by-side compare.</span></li>
+    </ol>
+  </div>
+</div></section>
+
+<section id="numbers" aria-labelledby="h-numbers"><div class="wrap">
+  <h2 id="h-numbers">What the runs measured</h2>
+  <p class="intro">From each run's log and check report. First the 19-second before and after, on one NVIDIA L40S GPU, 12&nbsp;November&nbsp;2026.</p>
+  <div class="nums">
+    <div><b>4 &times; 4.75 s</b><span>chained pieces, 114 frames each at 24 fps: 456 frames, 19 s</span></div>
+    <div><b>1920&nbsp;&times;&nbsp;1024</b><span>output size, 24 fps</span></div>
+    <div><b>643 to 675 s</b><span>GPU time per piece; the first includes loading the model</span></div>
+    <div><b>~37 of 46 GB</b><span>GPU memory in use on the L40S at this size</span></div>
+    <div><b>1,931 s</b><span>piece 4, because the pod's network storage had to read the model weights again. Pods now run without network storage</span></div>
+    <div><b>114 / 114</b><span>frames delivered in every piece</span></div>
+  </div>
+
+  <h3>The check report</h3>
+  <div class="scroll" tabindex="0" role="region" aria-label="Check report table, scrolls sideways on small screens"><table>
+    <thead><tr><th scope="col">Piece</th><th scope="col">GPU time</th><th scope="col">Speed</th><th scope="col">Max lag</th><th scope="col">Join PSNR</th><th scope="col">Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="p">Piece 1</td><td class="n" data-l="GPU time">675 s</td><td class="n" data-l="Speed">1.000</td><td class="n" data-l="Max lag">1 frame</td><td class="n" data-l="Join PSNR">first piece</td><td class="v"><span class="flag ok">OK</span></td></tr>
+      <tr><td class="p">Piece 2</td><td class="n" data-l="GPU time">645 s</td><td class="n" data-l="Speed">1.062</td><td class="n" data-l="Max lag">9 frames</td><td class="n" data-l="Join PSNR">18.8 dB</td><td class="v"><span class="flag">Speed off</span></td></tr>
+      <tr><td class="p">Piece 2, rerun</td><td class="n" data-l="GPU time">1,240 s</td><td class="n" data-l="Speed">1.017</td><td class="n" data-l="Max lag">6 frames</td><td class="n" data-l="Join PSNR">not logged</td><td class="v"><span class="flag ok">OK</span></td></tr>
+      <tr><td class="p">Piece 3</td><td class="n" data-l="GPU time">643 s</td><td class="n" data-l="Speed">1.042</td><td class="n" data-l="Max lag">7 frames</td><td class="n" data-l="Join PSNR">19.8 dB</td><td class="v"><span class="flag ok">OK</span></td></tr>
+      <tr><td class="p">Piece 4</td><td class="n" data-l="GPU time">1,931 s</td><td class="n" data-l="Speed">1.033</td><td class="n" data-l="Max lag">7 frames</td><td class="n" data-l="Join PSNR">21.2 dB</td><td class="v"><span class="flag ok">OK</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="limits-line">Limits: speed 0.95 to 1.05; lag up to 7 frames is OK, 8 to 15 is a warning.</p>
+
+  <h3>What the checks caught</h3>
+  <p class="measure">The first assembly ran fast. The chained pieces played at 1.03 to 1.06 times the source speed, and each join froze for 7 or 8 frames. The workflow fed each chained piece 22 frames of context but started its motion reference at the piece's own first frame, so the two were out of step. I patched it to start the reference 22 frames early, and a test on the same GPU then measured speed 1.000 and no frozen frames. For this take I reran piece 2 with a new seed and retimed the pieces by hand. The before and after above is that retimed take. Both later runs used the patched workflow.</p>
+
+  <h3>The two later runs</h3>
+  <div class="scroll" tabindex="0" role="region" aria-label="Later runs table, scrolls sideways on small screens"><table>
+    <thead><tr><th scope="col">Run</th><th scope="col">GPU</th><th scope="col">Pieces</th><th scope="col">First piece</th><th scope="col">Each chained piece</th><th scope="col">Speed</th><th scope="col">Max lag</th></tr></thead>
+    <tbody>
+      <tr><td class="p">Breakdance, 17.8 s</td><td class="n" data-l="GPU">A6000</td><td class="n" data-l="Pieces">4 &times; 4.4 s</td><td class="n" data-l="First piece">794 s</td><td class="n" data-l="Each chained piece">1,436 to 1,448 s</td><td class="n" data-l="Speed">1.000</td><td class="n" data-l="Max lag">2 frames</td></tr>
+      <tr><td class="p">The 39-second take</td><td class="n" data-l="GPU">A6000</td><td class="n" data-l="Pieces">8 &times; 4.9 s</td><td class="n" data-l="First piece">1,020 s</td><td class="n" data-l="Each chained piece">1,428 to 1,453 s</td><td class="n" data-l="Speed">1.000 to 1.012</td><td class="n" data-l="Max lag">3 frames</td></tr>
+    </tbody>
+  </table></div>
+  <p class="measure" style="margin-top:22px">A chained piece takes longer than the first because it also carries the frames of the piece before it: about 140k tokens against 98k on the Breakdance run. Breakdance's third piece logged 2,804&nbsp;s because a dropped connection held it; its generation took 1,436&nbsp;s.</p>
+
+  <h3>Cost, from the Swap page job</h3>
+  <div class="nums one">
+    <div><b>$2.14</b><span>GPU cost of the 39-second take: 4 h 58 min of A6000 pod time at $0.43/h, from start to results, one rerun included</span></div>
+  </div>
+</div></section>
+
+<section id="swap-page" aria-labelledby="h-swap"><div class="wrap">
+  <h2 id="h-swap">The Swap page</h2>
+  <p class="intro">The same pipeline runs from a page in my creative toolkit, with no terminal. Each piece waits for my decision before the next one starts.</p>
+  <div class="shots">
+    <figure>
+      <div class="shotframe"><a href="assets/page-inputs.jpg" aria-label="Open the full-size screenshot of the input step"><img src="assets/page-inputs.jpg" width="1600" height="564" alt="The Swap page's input step: a saved video, one saved character sheet, and a Read the video button" loading="lazy"></a></div>
+      <figcaption><span class="label">01 Inputs</span>The take and one character sheet, saved on the server. No GPU time is used yet. (The sheet's file name is blurred.)</figcaption>
+    </figure>
+    <figure>
+      <div class="shotframe"><a href="assets/page-cut.jpg" aria-label="Open the full-size screenshot of the cut step"><img src="assets/page-cut.jpg" width="1600" height="746" alt="The cut step: Claude's reading of the timeline in six phases with three notes, next to the range, resolution and piece length options" loading="lazy"></a></div>
+      <figcaption><span class="label">02 Cut</span>Claude reads the timeline and proposes the cut; I choose the range and piece length.</figcaption>
+    </figure>
+    <figure>
+      <div class="shotframe"><a href="assets/page-check.jpg" aria-label="Open the full-size screenshot of the check step"><img src="assets/page-check.jpg" width="1600" height="486" alt="The check step for piece 1-1: source and output side by side, and a score card reading 100, with timing, character and motion each at 100" loading="lazy"></a></div>
+      <figcaption><span class="label">03 Check</span>Source and output play in sync next to scores for timing, character and motion. Then I continue or rerun.</figcaption>
+    </figure>
+  </div>
+  <p class="note">Character and motion scores are Claude's grades against a fixed rubric. Only timing is measured.</p>
+</div></section>
+
+<section id="limits" aria-labelledby="h-limits"><div class="wrap">
+  <h2 id="h-limits">What it can't do yet</h2>
+  <div class="limits">
+    <div><h3>Spins and turns away from the camera</h3><p>In the breakdance run a head turns the wrong way for about 0.4&nbsp;s. In the 39-second take, one turn shows more face than the source. Both are in <a href="#results">More results</a>, unfixed.</p></div>
+    <div><h3>Small figures and crowds</h3><p>People smaller than about a third of the frame height, crowds, and footage with watermarks: I've avoided them so far.</p></div>
+    <div><h3>More than one person</h3><p>The code sends one sheet per person, but no multi-person job has run on a GPU yet.</p></div>
+    <div><h3>Busy pieces</h3><p>Three or more action beats in one piece get time-compressed, and a walk-in from outside the frame can turn into a hard cut. Shorter pieces help.</p></div>
+    <div><h3>Speed</h3><p>A 4.75-second piece takes about 11 minutes on an L40S, and a chained piece about 24 minutes on an A6000. Chained pieces have to run one after another.</p></div>
+    <div><h3>Products</h3><p>The swap model is trained on people. Swapping a product someone holds is a separate path I haven't proven.</p></div>
+  </div>
+  <p class="nda">Client work is under NDA. I can walk you through it in an interview.</p>
+  <div class="small">
+    <p>This is a personal study, not client or commercial work. The new person is AI-generated, and the source clips are Pexels stock videos 10265181 and 9344627. Music in the run video: "Cat Walk" by Arulo (Mixkit).</p>
+    <p>Built with AI coding assistants.</p>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><div class="close">
+  <span class="name">Geofrie A. Putra</span>
+  <p>Also: <a href="https://zadkhamaya.github.io/ad-versions/">the ad-versions case study</a> &middot; <a href="https://www.linkedin.com/in/geofrieazaryaputra/">LinkedIn</a></p>
+</div></div></footer>
+<script src="assets/compare.js"></script>
+</body>
+</html>
