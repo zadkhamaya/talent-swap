@@ -125,6 +125,7 @@ li::marker { color: var(--ink); }
 .gallery video.r { aspect-ratio: auto; height: auto; object-fit: contain; }
 .gallery figcaption { margin-top: 14px; color: var(--text); font-size: 15px; line-height: 1.5; max-width: 600px; }
 .gallery figcaption p + p { margin-top: 8px; }
+.gallery.one { grid-template-columns: minmax(0, 1fr); max-width: 860px; }
 
 /* how it works: the figure, then the steps */
 .flow { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 34px 56px; align-items: start; }
@@ -140,7 +141,6 @@ ol.steps b { font-weight: 600; color: var(--ink); }
 /* numbers: document bands, then the check table */
 .nums { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .nums > div { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 22px; min-height: 64px; padding: 12px 22px 12px 26px; border-radius: 18px; background: var(--card); }
-.nums.one { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
 .nums b { margin-left: auto; color: var(--ink); font: 500 19px/1.2 var(--font-mono); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .nums span { order: -1; flex: 1 1 220px; font-size: 14px; line-height: 1.4; color: var(--text); }
 .scroll { overflow-x: auto; border-radius: 28px; background: var(--card); padding: 8px 14px 10px; scrollbar-width: thin; }
@@ -166,16 +166,12 @@ tbody tr:last-child td { border-bottom: 0; }
 .shots figcaption { color: var(--text); font-size: 15px; }
 .shots figcaption .label { display: block; margin-bottom: 6px; }
 
-/* limits */
-.limits { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.limits > div { padding: 22px 26px; border-radius: 28px; background: var(--card); }
-.limits h3 { margin: 0 0 8px; font-size: 17px; line-height: 1.3; }
-.limits p { font-size: 15px; line-height: 1.5; }
-
+/* closing: the NDA line and credits */
 .nda { margin-top: 44px; max-width: 760px; padding: 22px 26px; border-radius: 28px; box-shadow: var(--edge-ink);
        font: 600 19px/1.45 var(--font-text); color: var(--ink); }
 .small { margin-top: 28px; max-width: 760px; font-size: 14px; line-height: 1.5; color: var(--text-3); }
 .small p + p { margin-top: 6px; }
+.closing .nda { margin-top: 0; }
 
 /* footer: the kit's closing block on blue */
 footer { background: var(--blue); margin-top: 24px; }
@@ -193,7 +189,7 @@ footer { background: var(--blue); margin-top: 24px; }
   .ba aside { max-width: 560px; }
 }
 @media (max-width: 760px) {
-  .nums, .limits { grid-template-columns: minmax(0, 1fr); }
+  .nums { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 640px) {
   body { font-size: 16px; }
@@ -201,7 +197,7 @@ footer { background: var(--blue); margin-top: 24px; }
   section { padding: 44px 0 52px; }
   .intro { margin-bottom: 26px; }
   h3 { margin-top: 34px; }
-  .media, .stage, .fallback video, .scroll, .limits > div, .nda { border-radius: 20px; }
+  .media, .stage, .fallback video, .scroll, .nda { border-radius: 20px; }
   .stage .tag { top: 10px; padding: 5px 10px; } .stage .tag.before { left: 10px; } .stage .tag.after { right: 10px; }
   .stage .knob { width: 40px; height: 40px; margin: -20px 0 0 -20px; }
   .nums > div { flex-direction: column; align-items: flex-start; gap: 4px; padding: 12px 18px; } .nums b { margin-left: 0; } .nums span { flex: none; }
@@ -217,7 +213,6 @@ footer { background: var(--blue); margin-top: 24px; }
   td.v { order: 1; margin-left: auto; }
   td.n { order: 2; flex: 0 0 auto; width: calc(50% - 8px); font-size: 13px; }
   td.n::before { content: attr(data-l); display: block; font: var(--label); letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
-  .limits > div { padding: 18px 20px; }
   .nda { padding: 18px 20px; font-size: 17px; }
   .flow img { border-radius: 20px; }
   .close { padding: 30px 0 36px; }
